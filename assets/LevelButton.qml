@@ -25,7 +25,7 @@ Container
             
             onButtonClick:
             {
-                lockedDialog.close()
+                lockedDialog.end()
             }
         }
     ]
@@ -42,7 +42,7 @@ Container
                 }
                 else
                 {
-                    lockedDialog.open()
+                    lockedDialog.start()
                 }
             }
         }

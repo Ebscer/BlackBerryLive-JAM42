@@ -2,10 +2,21 @@ import bb.cascades 1.0
 
 Dialog
 {
+    id: gameDialog
+    
 	signal buttonClick()
 	property alias title:lbl1.text
 	property alias subtitle:lbl2.text
 	property alias buttonText:mainButton.text
+	
+	function start()
+	{
+	    dialogInAnimation.play()
+	}
+	function end()
+	{
+	    dialogOutAnimation.play()
+	}
 	
 	Container
 	{
@@ -16,8 +27,41 @@ Dialog
 			maxWidth: 700.0
 			horizontalAlignment: HorizontalAlignment.Center
 			verticalAlignment: VerticalAlignment.Center
-			layout: DockLayout {
-			}
+			
+			animations:
+			[
+				TranslateTransition
+				{
+					id: dialogOutAnimation
+					toY: -850
+					duration: 500
+					onEnded:
+					{
+						gameDialog.close()
+					}
+				},
+				TranslateTransition
+				{
+					id: dialogInAnimation
+					toY: -850
+					duration: 0
+					easingCurve: StockCurve.QuadraticInOut
+					onEnded:
+					{
+						gameDialog.open()
+						dialogSlideInAnimation.play()
+					}
+				},
+				TranslateTransition
+				{
+					id: dialogSlideInAnimation
+					toY: 0
+					duration: 500
+					easingCurve: StockCurve.QuadraticInOut
+				}
+			]
+			
+			layout: DockLayout {}
 			ImageView {
 				imageSource: "asset:///images/DialogBG.png"
 			}

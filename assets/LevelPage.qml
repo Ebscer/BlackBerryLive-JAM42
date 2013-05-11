@@ -298,7 +298,7 @@ Page {
 					}
 					gameTimer.stop();
 					round_score = tube1score + tube2score;
-					subDialog.open();
+					subDialog.start();
 				}
 			}
 		}
@@ -321,7 +321,7 @@ Page {
                     left1.stop();
                     right2.stop();
                     left2.stop();
-                    loseDialog.open();
+                    loseDialog.start();
                     gameTimer.stop();
                 }
             }
@@ -342,17 +342,17 @@ Page {
 			    if(current_level==3)
 			    { //only 3 levels in this game so lets submit to scoreloop
 			        App.submitScore(current_score,0)
-			        scoreloopDialog.open()
+			        scoreloopDialog.start()
 			    }
 			    else if(current_level==2)
 			    { //need to use an in-app purches to get to level 3
-			        inAppDialog.open()
+			        inAppDialog.start()
 			    }
 			    else //otherwise advance to the next level
 			    {
 			        current_level++
 			    }
-			    subDialog.close()
+			    subDialog.end()
 			}
 		},
 		GameDialog
@@ -363,7 +363,7 @@ Page {
 		    buttonText: "Buy"
 		    onButtonClick:
 		    {
-		        inAppDialog.close()
+		        inAppDialog.end()
 		        var skuName = "UnlockAllTheLevels"
                 var metadata = "Get to play level 3"
                 paymentControl.purchase (skuName, skuName, skuName, metadata)
@@ -378,7 +378,7 @@ Page {
 		    
 		    onButtonClick:
 		    {
-		        loseDialog.close()
+		        loseDialog.end()
 		        navigationPane.pop()
 		    }
 		},
